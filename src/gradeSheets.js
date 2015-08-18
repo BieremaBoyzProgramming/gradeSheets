@@ -478,15 +478,17 @@ window.onerror =
           .on('change', onFileChange)
         .property('files');
 
-    input.select('#dateInput')
-        .attr('value', date)
-        .on(
-          'change',
-          function() {
-            date = d3.event.target.value;
-            scheduleUpdateOutput();
-          }
-        );
+    date =
+      input.select('#dateInput')
+          .attr('value', date)
+          .on(
+            'input',
+            function() {
+              date = d3.event.target.value;
+              scheduleUpdateOutput();
+            }
+          )
+        .property('value');
     input.style('display', null);
 
     scheduleUpdateOutput();
