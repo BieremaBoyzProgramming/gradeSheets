@@ -2,34 +2,41 @@
 # Author: Bierema Boyz Publishing
 # Copyright (c) 2015 Bierema Boyz Publishing. All rights reserved.
 
-srcJs = $(patsubst src/%,dist/lib/%,$(wildcard src/*.js))
+srcJs = $(patsubst src/%,build/lib/%,$(wildcard src/*.js))
+buildContents = build/LICENSE.txt build/gradeSheets.html $(srcJs) \
+		build/lib/gradeSheets.css build/lib/d3.min.js build/examples/Geom7.csv
 
-all: dist/LICENSE.txt dist/gradeSheets.html $(srcJs) dist/lib/gradeSheets.css \
-		dist/lib/d3.min.js dist/examples/Geom7.csv
+all: gradeSheets.zip
 
-dist dist/lib dist/examples build:
+buildContents: $(buildContents)
+
+gradeSheets.zip: $(buildContents)
+	cd build; 7z u ../gradeSheets.zip *
+
+build build/lib build/examples srcMaps:
 	mkdir --parents $@
 
 clean:
-	rm --recursive --force dist
+	rm --recursive --force srcMaps
 	rm --recursive --force build
+	rm --force gradeSheets.zip
 
 .SECONDEXPANSION:
 
-$(srcJs): dist/lib/%: src/% | $$(@D) build
-	echo -n > build/$(@F).map
-	uglifyjs $< --output $@ --source-map build/$(@F).map \
-		--source-map-root .. --source-map-url ../../build/$(@F).map --screw-ie8 \
+$(srcJs): build/lib/%: src/% | $$(@D) srcMaps
+	echo -n > srcMaps/$(@F).map
+	uglifyjs $< --output $@ --source-map srcMaps/$(@F).map \
+		--source-map-root .. --source-map-url ../../srcMaps/$(@F).map --screw-ie8 \
 		--mangle --compress --comments
 
-dist/LICENSE.txt dist/lib/d3.min.js: dist/%: % | $$(@D)
+build/LICENSE.txt build/lib/d3.min.js: build/%: % | $$(@D)
 	cp $< $@
 
-dist/gradeSheets.html: dist/%: src/% | $$(@D)
+build/gradeSheets.html: build/%: src/% | $$(@D)
 	cp $< $@
 
-dist/lib/gradeSheets.css: dist/lib/%: src/% | $$(@D)
+build/lib/gradeSheets.css: build/lib/%: src/% | $$(@D)
 	cp $< $@
 
-dist/examples/Geom7.csv: dist/examples/%.csv: testInput/%.tsv | $$(@D)
+build/examples/Geom7.csv: build/examples/%.csv: testInput/%.tsv | $$(@D)
 	cp $< $@

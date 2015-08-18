@@ -28,8 +28,9 @@ window.onerror =
 
   var fileParserURL;
   function createFileParserWorker() {
+    var result;
     try {
-      return new Worker("lib/parseDSV.js");
+      result = new Worker("lib/parseDSV.js");
     }
     catch (exception) {
       fileParserURL =
@@ -38,8 +39,18 @@ window.onerror =
               new Blob(
                 ['(' + bieremaBoyz.gradeSheets.parseDSV + ').call(self);'])
             )
-      return new Worker(fileParserURL);
+      result = new Worker(fileParserURL);
     }
+    result.postMessage(
+      {
+        documentLocation:
+          document.location
+              .href
+              .substring(0, document.location.href.lastIndexOf('/'))
+            + '/lib/'
+      }
+    );
+    return result;
   }
   var fileParserWorkers = [createFileParserWorker()];
 

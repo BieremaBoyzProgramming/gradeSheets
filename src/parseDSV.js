@@ -9,8 +9,6 @@ bieremaBoyz.gradeSheets = bieremaBoyz.gradeSheets || {};
 
 bieremaBoyz.gradeSheets.parseDSV =
   function() {
-    importScripts('https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js');
-
     function asciiDecoder(buffer) {
       return String.fromCharCode.apply(null, new Uint8Array(buffer));
     }
@@ -32,7 +30,10 @@ bieremaBoyz.gradeSheets.parseDSV =
     onmessage = function(event) {
       var i;
 
-      if (event.data.file) {
+      if (event.data.documentLocation) {
+        importScripts(event.data.documentLocation + 'd3.min.js');
+      }
+      else if (event.data.file) {
          file = event.data.file;
       }
       else {
