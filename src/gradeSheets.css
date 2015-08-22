@@ -13,7 +13,7 @@ body {
   margin: 0px;
   font-size: medium;
 }
-#warnings, #input, .loading, .error, .about {
+#warnings, #input, .loading, .error, .supportLinks {
   margin: 8px;
 }
 #output {
@@ -116,7 +116,7 @@ p.comment {
 }
 
 @media print {
-  #input, .loading, .error, .about {
+  #input, .loading, .error, .supportLinks {
     display: none;
   }
   .studentContainer.bottomOfPage{

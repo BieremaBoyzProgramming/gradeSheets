@@ -3,7 +3,8 @@
 # Copyright (c) 2015 Bierema Boyz Publishing. All rights reserved.
 
 srcJs = $(patsubst src/%,build/lib/%,$(wildcard src/*.js))
-buildContents = build/LICENSE.txt build/gradeSheets.html $(srcJs) \
+docs = $(patsubst %,build/%,$(wildcard *.txt))
+buildContents = $(docs) build/gradeSheets.html $(srcJs) \
 		build/lib/gradeSheets.css build/lib/d3.min.js build/examples/Geom7.csv
 
 all: gradeSheets.zip
@@ -29,7 +30,7 @@ $(srcJs): build/lib/%: src/% | $$(@D) srcMaps
 		--source-map-root .. --source-map-url ../../srcMaps/$(@F).map --screw-ie8 \
 		--mangle --compress --comments
 
-build/LICENSE.txt build/lib/d3.min.js: build/%: % | $$(@D)
+$(docs) build/lib/d3.min.js: build/%: % | $$(@D)
 	cp $< $@
 
 build/gradeSheets.html: build/%: src/% | $$(@D)
