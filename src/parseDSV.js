@@ -25,7 +25,7 @@ bieremaBoyz.gradeSheets.parseDSV =
       );
     }
 
-    var file;
+    var file, fileKey;
 
     onmessage = function(event) {
       var i;
@@ -35,6 +35,7 @@ bieremaBoyz.gradeSheets.parseDSV =
       }
       else if (event.data.file) {
          file = event.data.file;
+         fileKey = event.data.fileKey;
       }
       else {
         var uInt8Array =
@@ -124,7 +125,7 @@ bieremaBoyz.gradeSheets.parseDSV =
           var result = [];
           var categories = {};
           result.categories = [];
-          result.file = file;
+          result.fileKey = fileKey;
           result.name = headingRows['class'][1];
           var assignments = [];
           if (!headingRows.category.length) {

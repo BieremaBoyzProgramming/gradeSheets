@@ -189,7 +189,7 @@ window.onerror =
                     scheduleUpdateOutput();
                     event.preventDefault();
                   };
-                worker.postMessage({ file: d });
+                worker.postMessage({ file: d, fileKey: d.key });
                 worker.postMessage(event.target.result);
               };
             d.data.reader.readAsArrayBuffer(d);
@@ -207,7 +207,7 @@ window.onerror =
       output.selectAll('.studentContainer')
         .data(
           Array.prototype.concat.apply([], loaded),
-          function(d) { return d.index + ' ' + d['class'].file.key; }
+          function(d) { return d.index + ' ' + d['class'].fileKey; }
         );
     studentContainers.exit().remove();
     var studentContainersEnter = studentContainers.enter();
