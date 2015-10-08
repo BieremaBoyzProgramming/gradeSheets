@@ -399,7 +399,7 @@ window.onerror =
       }
     );
 
-    for (i = classesByDensity.length - 1; i >= 0; i--) {
+    for (i = classesByDensity.length - 1; i >= 1; i--) {
       if (classesByDensity[i]) {
         var studentCount = classesByDensity[i].studentCount;
         var nextStudentCount =
@@ -408,18 +408,30 @@ window.onerror =
           <= Math.ceil(studentCount / i) + Math.ceil(nextStudentCount / (i - 1))
         )
         {
-          if (!classesByDensity[i - 1]) {
-            classesByDensity[i - 1] = [];
-            classesByDensity[i - 1].studentCount = 0;
+          if (classesByDensity[i - 1]) {
+            Array.prototype
+              .push
+              .apply(classesByDensity[i - 1], classesByDensity[i]);
+            classesByDensity[i - 1].studentCount +=
+              classesByDensity[i].studentCount;
           }
-          Array.prototype
-            .push
-            .apply(classesByDensity[i - 1], classesByDensity[i]);
-          classesByDensity[i - 1].studentCount +=
-            classesByDensity[i].studentCount;
+          else {
+            classesByDensity[i - 1] = classesByDensity[i];
+          }
           delete classesByDensity[i];
         }
       }
+    }
+    
+    if (classesByDensity[0]) {
+      if (classesByDensity[1]) {
+        Array.prototype.push.apply(classesByDensity[1], classesByDensity[0]);
+        classesByDensity[1].studentCount += classesByDensity[0].studentCount;
+      }
+      else {
+        classesByDensity[1] = classesByDensity[0];
+      }
+      delete classesByDensity[0];
     }
 
     var totalStudentCount = 0;

@@ -82,7 +82,7 @@ bieremaBoyz.gradeSheets.parseDSV =
           var rows =
             parserDecoder.parser.parseRows(parserDecoder.decoder(event.data));
           var headingRows =
-            { assignment: true, total: true, category: [], 'class': true };
+            { assignment: true, total: true, category: true, 'class': true };
           var students = [];
           var length = -1;
           var error = null;
@@ -129,7 +129,8 @@ bieremaBoyz.gradeSheets.parseDSV =
           result.name = headingRows['class'][1];
           var assignments = [];
           if (!headingRows.category.length) {
-            headingRows.category = Array.apply(null, Array(length)).map(String);
+            headingRows.category =
+              Array.apply(null, Array(length)).map(function() { return ""; });
           }
           for (i = 1; i < length; i++) {
             if (headingRows.assignment[i]) {

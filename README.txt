@@ -24,6 +24,9 @@ only supports ASCII characters) or "Unicode text" as the file type.
 
 Only letter paper size is currently supported.
 
+Progress reports that do not fit onto one page are also not supported. No
+warning will be issued.
+
 Setup
 -----
 
