@@ -446,6 +446,9 @@ window.onerror =
               function(student) {
                 student.order = densityStudentCount + totalStudentCount;
                 var index = densityStudentCount * i % (pages * i - 1);
+                if (densityStudentCount && !index) {
+                  index = densityStudentCount;
+                }
                 student.index = index + totalStudentCount;
                 student.pageBreakBefore = student.index && !(index % i);
                 densityStudentCount++;
