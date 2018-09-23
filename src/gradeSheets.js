@@ -76,7 +76,7 @@ window.onerror =
     Array.prototype.forEach.call(
       filesList,
       function(file) {
-        file.key = file.lastModifiedDate.valueOf() + file.name;
+        file.key = file.lastModified + file.name;
         keys[file.key] = true;
         if (filesData.hasOwnProperty(file.key)) {
           file.data = filesData[file.key];

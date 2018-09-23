@@ -7,9 +7,10 @@ formatted progress reports.
 Compatibility
 -------------
 
-The application has been tested on Google Chrome 44, Mozilla Firefox 39,
-Internet Explorer 11, and Microsoft Edge 20. Other browsers and earlier versions
-of these browsers might behave unexpectedly and are not recommended.
+The application is intended to support the current versions of Google Chrome,
+Mozilla Firefox, Internet Explorer, and Microsoft Edge. Other browsers and
+earlier versions of these browsers might behave unexpectedly and are not
+recommended.
 
 * On Internet Explorer and Microsoft Edge, make sure headers and footers are
   disabled before printing; this can be done in Print preview or Page setup for
