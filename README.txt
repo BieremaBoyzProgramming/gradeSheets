@@ -33,10 +33,10 @@ Setup
 
 The application's home page is
 https://github.com/BieremaBoyzProgramming/gradeSheets/ . The current version of
-the application can be downloaded directly using the URL
-https://github.com/BieremaBoyzProgramming/gradeSheets/blob/master/gradeSheets.zip?raw=true
-. Once the ZIP file has been saved, extract it; on Windows, this can be done by
-right-clicking on the ZIP file and choosing "Extract All."
+the application can be downloaded at
+https://github.com/BieremaBoyzProgramming/gradeSheets/releases . Once the ZIP
+file has been saved, extract it; on Windows, this can be done by right-clicking
+on the ZIP file and choosing "Extract All."
 
 * If you are updating the application from a previous version, we recommend that
   you delete the previous version first rather than extracting the new version
