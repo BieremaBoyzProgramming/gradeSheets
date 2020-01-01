@@ -28,19 +28,13 @@ window.onerror =
 
   var fileParserURL;
   function createFileParserWorker() {
-    var result;
-    try {
-      result = new Worker("lib/parseDSV.js");
-    }
-    catch (exception) {
-      fileParserURL =
-        fileParserURL
-          || URL.createObjectURL(
-              new Blob(
-                ['(' + bieremaBoyz.gradeSheets.parseDSV + ').call(self);'])
-            )
-      result = new Worker(fileParserURL);
-    }
+    fileParserURL =
+      fileParserURL
+        || URL.createObjectURL(
+            new Blob(
+              ['(' + bieremaBoyz.gradeSheets.parseDSV + ').call(self);'])
+          )
+    const result = new Worker(fileParserURL);
     result.postMessage(
       {
         documentLocation:

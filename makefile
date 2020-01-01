@@ -26,9 +26,8 @@ clean:
 
 $(srcJs): build/lib/%: src/% | $$(@D) srcMaps
 	echo -n > srcMaps/$(@F).map
-	uglifyjs $< --output $@ --source-map filename srcMaps/$(@F).map \
-		--source-map-root .. --source-map-url ../../srcMaps/$(@F).map --screw-ie8 \
-		--mangle --compress --comments
+	uglifyjs $< --output $@ --source-map srcMaps/$(@F).map --source-map-root .. \
+		--source-map-url ../../srcMaps/$(@F).map --mangle --compress --comments
 
 $(docs) build/lib/d3.min.js: build/%: % | $$(@D)
 	cp $< $@
